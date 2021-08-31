@@ -1,0 +1,7 @@
+fastapi
+uvicorn==0.15.0
+python-multipart==0.0.5
+python-jose[cryptography]
+passlib[bcrypt]
+nltk==3.5
+scikit-learn==0.22.1

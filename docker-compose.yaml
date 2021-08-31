@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+  alice_app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile  
+    image: testaccount4dstest/alice_core_image:latest
+    container_name: alice_core
+    ports: 
+      - "8000:8000"
+    network_mode: "host"
+  test_user:
+    build:
+      context: ./tests/test_user
+      dockerfile: ./Dockerfile
+    image: testaccount4dstest/test_user_image:latest
+    container_name: test_user
+    network_mode: "host"
+    depends_on:
+      - alice_app
+  test_score:
+    build:
+      context: ./tests/test_score
+      dockerfile: ./Dockerfile
+    image: testaccount4dstest/test_score_image:latest
+    container_name: test_score
+    network_mode: "host"
+    depends_on:
+      - alice_app
+  test_sentiment:
+    build:
+      context: ./tests/test_sentiment
+      dockerfile: ./Dockerfile
+    image: testaccount4dstest/test_sentiment_image:latest
+    container_name: test_sentiment
+    network_mode: "host"
+    depends_on:
+      - alice_app

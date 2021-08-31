@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alice-deployment
+  labels:
+    app: alice-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: alice-api
+  template:
+    metadata:
+      labels:
+        app: alice-api
+    spec:
+      containers:
+      - name: alice-api
+        image: testaccount4dstest/alice_core_image:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: SECRET
+          valueFrom:
+            secretKeyRef:
+              name: alice-secret
+              key: secret_key
